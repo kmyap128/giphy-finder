@@ -16,7 +16,8 @@
  }
 
  body {
-    background-image: url();
+    background-image: url(/images/light_mode.png);
+    background-size: 100%;
  }
  
  #status{
