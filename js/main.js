@@ -93,3 +93,29 @@ function dataLoaded(e) {
 function dataError(e) {
     console.log("An error occured")
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the checkbox input element
+    const checkbox = document.querySelector('.switch input');
+
+    // Add event listener for 'change' event on the checkbox
+    checkbox.addEventListener('change', function() {
+        // Get the body element
+        const body = document.body;
+        const wrapper = document.getElementById("wrapper")
+        const toggle = document.getElementById("toggle")
+
+        // Check if the checkbox is checked
+        if (checkbox.checked) {
+            // Set body background color to dark
+            body.style.backgroundColor = '#21323f';
+            wrapper.style.backgroundColor = '#a9a9a9'
+            toggle.style.color = "#ffffff"
+        } else {
+            // Set body background color to light
+            body.style.backgroundColor = '#cbf9ff'
+            wrapper.style.backgroundColor = '#ffffff';
+            toggle.style.color = '#000000'
+        }
+    });
+});
