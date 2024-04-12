@@ -98,13 +98,19 @@ function dataLoaded(e) {
 
     document.querySelector("#content").innerHTML = bigString;
     document.querySelector("#status").innerHTML = "<b>Success!<b><p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
-
+    document.querySelector(".result button").addEventListener('click', copyLink);
 }
 
-//  function copyLink(link) {    
-//         navigator.clipboard.writeText(link);
-// }
-// use target e attribute for button
+let copyLink = (e) => { 
+    console.log("Copy Link clicked");
+    e.target.innerHTML = "Copied link!";
+    let url = e.target.getAttribute('data-url');
+    navigator.clipboard.writeText(url);
+    // change text back after 3 seconds
+    setTimeout(() => {
+        e.target.innerHTML = "Copy Link";
+    }, 3000);
+}
 
 function dataError(e) {
     console.log("An error occured")
