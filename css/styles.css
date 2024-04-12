@@ -120,6 +120,20 @@ header h1{
     order: -1;  
 }
 
+.result a {
+    text-decoration: none;
+    color: white;
+}
+
+.result button {
+    background-color: #8fc800;
+    border-color: #8fc800;
+}
+
+.result #url {
+    visibility: hidden;
+}
+
 button{
     font-family: 'Short Stack', sans-serif;
     display : inline-block;

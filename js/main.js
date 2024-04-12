@@ -1,15 +1,26 @@
+// TODO: 
+// add view more button to vview more results (limit to 10-15 per page maybe)
+// change image to be clickable link to giphy
+// fix copy link
+// change button color
+// add favorites bar
+
+
+
 window.onload = (e) => {
     document.querySelector("#search").onclick = searchButtonClicked;
 }
 
 let displayTerm = "";
 
+
+
 function searchButtonClicked() {
     console.log("searchButtonClicked() called");
 
     const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
 
-    const GIPHY_KEY = "5PuWjWVnwpHUQPZK866vd7wQ2qeCeqg7";
+    const GIPHY_KEY = "1EecLZC0Kv2XAQDx4fmAWZRik0zE6wc2";
 
     let url = GIPHY_URL + "api_key=" + GIPHY_KEY;
     console.log(url);
@@ -77,10 +88,9 @@ function dataLoaded(e) {
         let rating = result.rating ? result.rating.toUpperCase() : "N/A";
 
         let line = `<div class="result">`;
-        line += `<img src="${imageUrl}" alt="" />`;
-        line += `<span><a href="${url}">View on Giphy</a>`;
-        
-        line += `<p data-rating="${rating}">Rating: ${rating}</p></span>`;
+        line += `<a href="${url}"><img src="${imageUrl}" alt="" /></a>`;
+        line += `<span><button data-url="${url}" onclick="copyLink">Copy Link</button>`;
+        line += `<p data-rating="${rating}">Rating: ${rating}</p></span>`
         line += `</div>`;
 
         bigString += line;
@@ -88,7 +98,13 @@ function dataLoaded(e) {
 
     document.querySelector("#content").innerHTML = bigString;
     document.querySelector("#status").innerHTML = "<b>Success!<b><p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
+
 }
+
+//  function copyLink(link) {    
+//         navigator.clipboard.writeText(link);
+// }
+// use target e attribute for button
 
 function dataError(e) {
     console.log("An error occured")
