@@ -135,8 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
             toggle.style.color = "#ffffff"
         } else {
             // Set body background color to light
-            body.style.backgroundColor = '#cbf9ff'
-            wrapper.style.backgroundColor = '#ffffff';
+            body.style.backgroundColor = '#91d4dd'
+            wrapper.style.backgroundColor = '#ebebeb';
             toggle.style.color = '#000000'
         }
     });

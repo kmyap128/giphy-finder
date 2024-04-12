@@ -5,7 +5,7 @@
 }
 
  body {
-    background-color: #cbf9ff;
+    background-color: #91d4dd;
 }
 
 .switch {
@@ -70,7 +70,7 @@ input:checked + .slider:before {
 #wrapper {
     margin: 50px;
     padding: 50px;
-    background-color: #FAF9F6;
+    background-color: #ebebeb;
     border-radius: 20px;
 }
 
