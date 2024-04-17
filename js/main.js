@@ -1,19 +1,22 @@
 // TODO: 
 // add view more button to vview more results (limit to 10-15 per page maybe)
-// change image to be clickable link to giphy
 // fix copy link
-// change button color
 // add favorites bar
 
 
 
 window.onload = (e) => {
     document.querySelector("#search").onclick = searchButtonClicked;
+    document.querySelector("#happy").onclick = navButtonClicked;
+    document.querySelector("#sad").onclick = navButtonClicked;
+    document.querySelector("#excited").onclick = navButtonClicked;
+    document.querySelector("#bored").onclick = navButtonClicked;
+    document.querySelector("#angry").onclick = navButtonClicked;
 }
 
 let displayTerm = "";
 
-
+// have function for each nav button that calls search button
 
 function searchButtonClicked() {
     console.log("searchButtonClicked() called");
@@ -29,6 +32,39 @@ function searchButtonClicked() {
     displayTerm = term;
 
     term = term.trim();
+    console.log(term);
+
+    term = encodeURIComponent(term);
+
+    console.log("Encoded", term)
+
+    if(term.length < 1) return;
+
+    url += "&q=" + term;
+    console.log("Term URL:", url);
+
+    url += "&limit=" + document.querySelector("#limit").value;
+    console.log("URL w/Limit:", url);
+
+    document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
+
+    getData(url);
+}
+
+
+function navButtonClicked(term) {
+    console.log("navButtonClicked() called");
+
+    const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
+
+    const GIPHY_KEY = "1EecLZC0Kv2XAQDx4fmAWZRik0zE6wc2";
+
+    let url = GIPHY_URL + "api_key=" + GIPHY_KEY;
+    console.log(url);
+
+    displayTerm = term;
+
+    term = search_term.trim();
     console.log(term);
 
     term = encodeURIComponent(term);
@@ -86,20 +122,32 @@ function dataLoaded(e) {
         let url = result.url;
 
         let rating = result.rating ? result.rating.toUpperCase() : "N/A";
+        let rcolor = `#008000`;
+        if ( rating == 'G') {
+            rcolor = `#008000`;
+        }
+        if ( rating == 'PG') {
+            rcolor = `#008000`;
+        }
+        if ( rating == 'PG-13') {
+            rcolor = `#ffff00`;
+        }
+
 
         let line = `<div class="result">`;
         line += `<a href="${url}"><img src="${imageUrl}" alt="" /></a>`;
         line += `<span><button data-url="${url}" onclick="copyLink">Copy Link</button>`;
-        line += `<p data-rating="${rating}">Rating: ${rating}</p></span>`
+        line += `<p data-rating="${rating}" style="background-color: ${rcolor};">Rating: ${rating}</p></span>`;
         line += `</div>`;
 
         bigString += line;
     }
 
     document.querySelector("#content").innerHTML = bigString;
-    document.querySelector("#status").innerHTML = "<b>Success!<b><p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
+    document.querySelector("#status").innerHTML = "<p><i>Showing " + results.length + " results for '" + displayTerm + "'</i></p>";
     document.querySelector(".result button").addEventListener('click', copyLink);
 }
+
 
 let copyLink = (e) => { 
     console.log("Copy Link clicked");
@@ -111,6 +159,7 @@ let copyLink = (e) => {
         e.target.innerHTML = "Copy Link";
     }, 3000);
 }
+
 
 function dataError(e) {
     console.log("An error occured")
@@ -135,8 +184,8 @@ document.addEventListener('DOMContentLoaded', function() {
             toggle.style.color = "#ffffff"
         } else {
             // Set body background color to light
-            body.style.backgroundColor = '#91d4dd'
-            wrapper.style.backgroundColor = '#ebebeb';
+            body.style.backgroundColor = '#cbf9ff'
+            wrapper.style.backgroundColor = '#ffffff';
             toggle.style.color = '#000000'
         }
     });

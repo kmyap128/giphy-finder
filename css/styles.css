@@ -5,7 +5,7 @@
 }
 
  body {
-    background-color: #91d4dd;
+    background-color: #cbf9ff;
 }
 
 .switch {
@@ -70,21 +70,33 @@ input:checked + .slider:before {
 #wrapper {
     margin: 50px;
     padding: 50px;
-    background-color: #ebebeb;
+    background-color: #FAF9F6;
     border-radius: 20px;
 }
 
-header{
+#navbar {
+    display: flex;
+}
 
+#navbar button {
+    background-color: #4e7171;
+    border: 0px;
+    box-shadow: none;
+    width: 100%;
+}
+
+#navbar button:hover {
+    background-color: #436767;
 }
 
 header h1{
     margin:0;
     color:black;
     text-align:center;
-    font-size:100px;
+    font-size:80px;
     font-weight: 600;
     padding-top: 35px;
+    padding-bottom: 35px;
 }
 
 #status{
@@ -126,8 +138,8 @@ header h1{
 }
 
 .result button {
-    background-color: #8fc800;
-    border-color: #8fc800;
+    background-color: #4e7171;
+    border-color: #4e7171;
 }
 
 .result #url {
@@ -140,7 +152,6 @@ button{
     cursor : pointer;
     border-style : solid;
     border-width : 1px;
-    border-radius : 50px;
     padding : 10px 18px;
     box-shadow : 0 1px 4px rgba(0,0,0,.6);
     font-size : 9.5pt;
@@ -151,23 +162,74 @@ button{
 }
 
 button.green{
-    border-color: #8fc800;
-    background: #8fc800;
-    background: linear-gradient(top, #8fc800 0%,#438c00 100%);
+    border-color: #4e7171;
+    background: #4e7171;
+    background: linear-gradient(top, #4e7171 0%,#436767 100%);
 }
 
 button:hover{
-    background: #8fDD00;
+    background: #4e7171;
 }
 
 button:active{
-    background: #8fFF00;
+    background: #4e7171;
     box-shadow : 0 0 6px rgba(0,0,0,.6);
 }
 
 button:focus {outline:0;}
 
-.widgets{
+.widgets {
+    display: flex;
+    flex-flow: wrap;
     margin-top: 1em;
     margin-bottom:1em;
+    justify-content: center;
+}
+
+#search-button {
+    text-align: center;
+}
+
+#search-wrapper {
+    border: 1px solid;
+    width: 300px;
+    height: 40px;
+    padding-top: 5px;
+    padding-left: 5px;
+    background-color: white;
+}
+
+#search-wrapper label {
+    font-size: 0.75em;
+    text-align: left;
+    vertical-align: top;
+    text-transform: uppercase;
+    color: rgb(144, 144, 144);
+    margin-left: 2px;
+}
+
+input {
+    border: 0px;
+    width: 200px;
+    height: 35px;
+}
+
+#select-wrapper {
+    border: 1px solid;
+    width: 80px;
+    padding-left: 5px;
+    margin-left: 20px;
+    background-color: white;
+}
+
+#select-wrapper label {
+    font-size: 0.75em;
+    text-align: left;
+    text-transform: uppercase;
+    color: rgb(144, 144, 144);
+}
+
+select {
+    border: 0px;
+    width: 70px;
 }
