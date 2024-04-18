@@ -43,15 +43,17 @@ function angryButtonClicked() {
 
 // have function for each nav button that calls search button
 
+const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
+
+const GIPHY_KEY = "1EecLZC0Kv2XAQDx4fmAWZRik0zE6wc2";
+
+let api_url = GIPHY_URL + "api_key=" + GIPHY_KEY;
+console.log(api_url);
+
+let offset = 0;
+
 function search(term) {
     console.log("search() called");
-
-    const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
-
-    const GIPHY_KEY = "1EecLZC0Kv2XAQDx4fmAWZRik0zE6wc2";
-
-    let url = GIPHY_URL + "api_key=" + GIPHY_KEY;
-    console.log(url);
 
     displayTerm = term;
 
@@ -64,26 +66,37 @@ function search(term) {
 
     if(term.length < 1) return;
 
-    url += "&q=" + term;
-    console.log("Term URL:", url);
+    api_url += "&q=" + term;
+    console.log("Term URL:", api_url);
 
-    url += "&limit=" + document.querySelector("#limit").value;
-    console.log("URL w/Limit:", url);
+    api_url += "&limit=" + document.querySelector("#limit").value;
+    console.log("URL w/Limit:", api_url);
 
     document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
 
-    getData(url);
+    getData(api_url, offset);
 }
 
-
-function getData(url) {
+function getData(url, offset) {
     let xhr = new XMLHttpRequest();
 
     xhr.onload = dataLoaded;
     xhr.onerror = dataError;
 
-    xhr.open("GET",url);
+    xhr.open("GET", `${url}&offset=${offset}`);
     xhr.send();
+}
+
+function loadNextPage() {
+    offset += 10;
+    getData(api_url, offset);
+}
+
+function loadPreviousPage() {
+    if (offset >= 10) {
+        offset -= 10; // Decrement offset to load previous page
+        getData(api_url, offset);
+    }
 }
 
 function dataLoaded(e) {
@@ -101,8 +114,7 @@ function dataLoaded(e) {
 
     let results = obj.data
     console.log("results.length = " + results.length);
-    let bigString = 
-    "";
+    let bigString = "";
 
     for (let i = 0; i < results.length; i++) {
         let result = results[i];
@@ -127,7 +139,7 @@ function dataLoaded(e) {
 
         let line = `<div class="result">`;
         line += `<a href="${url}"><img src="${imageUrl}" alt="" /></a>`;
-        line += `<span><button data-url="${url}" onclick="copyLink">Copy Link</button>`;
+        line += `<span><button id="link${i}" data-url="${url}">Copy Link</button>`;
         line += `<p data-rating="${rating}" style="background-color: ${rcolor};">Rating: ${rating}</p></span>`;
         line += `</div>`;
 
@@ -136,18 +148,85 @@ function dataLoaded(e) {
 
     document.querySelector("#content").innerHTML = bigString;
     document.querySelector("#status").innerHTML = "<p><i>Showing " + results.length + " results for '" + displayTerm + "'</i></p>";
-    document.querySelector(".result button").addEventListener('click', copyLink);
+    document.querySelector("#footer").innerHTML = "<button id='left'> <- </button> <button id='right'> -> </button>";
+
+    document.querySelector("#right").onclick = loadNextPage;
+    document.querySelector("#left").onclick = loadPreviousPage;
+
+    document.querySelector("#link0").onclick = copy0;
+    document.querySelector("#link1").onclick = copy1;
+    document.querySelector("#link2").onclick = copy2;
+    document.querySelector("#link3").onclick = copy3;
+    document.querySelector("#link4").onclick = copy4;
+    document.querySelector("#link5").onclick = copy5;
+    document.querySelector("#link6").onclick = copy6;
+    document.querySelector("#link7").onclick = copy7;
+    document.querySelector("#link8").onclick = copy8;
+    document.querySelector("#link9").onclick = copy9;
 }
 
 
-let copyLink = (e) => { 
+function copy0() {
+    let url = document.querySelector("#link0").getAttribute("data-url");
+    copyLink(url, "#link0");
+}
+
+function copy1() {
+    let url = document.querySelector("#link1").getAttribute("data-url");
+    copyLink(url, "#link1");
+}
+
+function copy2() {
+    let url = document.querySelector("#link2").getAttribute("data-url");
+    copyLink(url, "#link2");
+}
+
+function copy3() {
+    let url = document.querySelector("#link3").getAttribute("data-url");
+    copyLink(url, "#link3");
+}
+
+function copy4() {
+    let url = document.querySelector("#link4").getAttribute("data-url");
+    copyLink(url, "#link4");
+}
+
+function copy5() {
+    let url = document.querySelector("#link5").getAttribute("data-url");
+    copyLink(url, "#link5");
+}
+
+function copy6() {
+    let url = document.querySelector("#link6").getAttribute("data-url");
+    copyLink(url, "#link6");
+}
+
+function copy7() {
+    let url = document.querySelector("#link7").getAttribute("data-url");
+    copyLink(url, "#link7");
+}
+
+function copy8() {
+    let url = document.querySelector("#link8").getAttribute("data-url");
+    copyLink(url, "#link8");
+}
+
+function copy9() {
+    let url = document.querySelector("#link9").getAttribute("data-url");
+    copyLink(url, "#link9");
+}
+
+// make sure to change target, find way to pass specific button into function
+function copyLink(url, button) { 
     console.log("Copy Link clicked");
-    e.target.innerHTML = "Copied link!";
-    let url = e.target.getAttribute('data-url');
+
+    let item = document.querySelector(button);
+
+    item.innerHTML = "Copied link!";
     navigator.clipboard.writeText(url);
     // change text back after 3 seconds
     setTimeout(() => {
-        e.target.innerHTML = "Copy Link";
+        item.innerHTML = "Copy Link";
     }, 3000);
 }
 
