@@ -7,19 +7,44 @@
 
 window.onload = (e) => {
     document.querySelector("#search").onclick = searchButtonClicked;
-    document.querySelector("#happy").onclick = navButtonClicked;
-    document.querySelector("#sad").onclick = navButtonClicked;
-    document.querySelector("#excited").onclick = navButtonClicked;
-    document.querySelector("#bored").onclick = navButtonClicked;
-    document.querySelector("#angry").onclick = navButtonClicked;
+    document.querySelector("#happy").onclick = happyButtonClicked;
+    document.querySelector("#sad").onclick = sadButtonClicked;
+    document.querySelector("#excited").onclick = excitedButtonClicked;
+    document.querySelector("#bored").onclick = boredButtonClicked;
+    document.querySelector("#angry").onclick = angryButtonClicked;
 }
 
 let displayTerm = "";
 
+function searchButtonClicked() {
+    let term = document.querySelector("#searchterm").value;
+    search(term);
+}
+
+function happyButtonClicked() {
+    search("happy");
+}
+
+function sadButtonClicked() {
+    search("sad");
+}
+
+function excitedButtonClicked() {
+    search("excited");
+}
+
+function boredButtonClicked() {
+    search("bored");
+}
+
+function angryButtonClicked() {
+    search("angry");
+}
+
 // have function for each nav button that calls search button
 
-function searchButtonClicked() {
-    console.log("searchButtonClicked() called");
+function search(term) {
+    console.log("search() called");
 
     const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
 
@@ -28,43 +53,9 @@ function searchButtonClicked() {
     let url = GIPHY_URL + "api_key=" + GIPHY_KEY;
     console.log(url);
 
-    let term = document.querySelector("#searchterm").value;
     displayTerm = term;
 
     term = term.trim();
-    console.log(term);
-
-    term = encodeURIComponent(term);
-
-    console.log("Encoded", term)
-
-    if(term.length < 1) return;
-
-    url += "&q=" + term;
-    console.log("Term URL:", url);
-
-    url += "&limit=" + document.querySelector("#limit").value;
-    console.log("URL w/Limit:", url);
-
-    document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
-
-    getData(url);
-}
-
-
-function navButtonClicked(term) {
-    console.log("navButtonClicked() called");
-
-    const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
-
-    const GIPHY_KEY = "1EecLZC0Kv2XAQDx4fmAWZRik0zE6wc2";
-
-    let url = GIPHY_URL + "api_key=" + GIPHY_KEY;
-    console.log(url);
-
-    displayTerm = term;
-
-    term = search_term.trim();
     console.log(term);
 
     term = encodeURIComponent(term);
