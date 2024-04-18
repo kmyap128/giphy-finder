@@ -153,74 +153,17 @@ function dataLoaded(e) {
     document.querySelector("#right").onclick = loadNextPage;
     document.querySelector("#left").onclick = loadPreviousPage;
 
-    document.querySelector("#link0").onclick = copy0;
-    document.querySelector("#link1").onclick = copy1;
-    document.querySelector("#link2").onclick = copy2;
-    document.querySelector("#link3").onclick = copy3;
-    document.querySelector("#link4").onclick = copy4;
-    document.querySelector("#link5").onclick = copy5;
-    document.querySelector("#link6").onclick = copy6;
-    document.querySelector("#link7").onclick = copy7;
-    document.querySelector("#link8").onclick = copy8;
-    document.querySelector("#link9").onclick = copy9;
+    for (let i = 0; i < results.length; i++) {
+        document.querySelector(`#link${i}`).onclick = () => copyLink(i);
+    }
 }
 
-
-function copy0() {
-    let url = document.querySelector("#link0").getAttribute("data-url");
-    copyLink(url, "#link0");
-}
-
-function copy1() {
-    let url = document.querySelector("#link1").getAttribute("data-url");
-    copyLink(url, "#link1");
-}
-
-function copy2() {
-    let url = document.querySelector("#link2").getAttribute("data-url");
-    copyLink(url, "#link2");
-}
-
-function copy3() {
-    let url = document.querySelector("#link3").getAttribute("data-url");
-    copyLink(url, "#link3");
-}
-
-function copy4() {
-    let url = document.querySelector("#link4").getAttribute("data-url");
-    copyLink(url, "#link4");
-}
-
-function copy5() {
-    let url = document.querySelector("#link5").getAttribute("data-url");
-    copyLink(url, "#link5");
-}
-
-function copy6() {
-    let url = document.querySelector("#link6").getAttribute("data-url");
-    copyLink(url, "#link6");
-}
-
-function copy7() {
-    let url = document.querySelector("#link7").getAttribute("data-url");
-    copyLink(url, "#link7");
-}
-
-function copy8() {
-    let url = document.querySelector("#link8").getAttribute("data-url");
-    copyLink(url, "#link8");
-}
-
-function copy9() {
-    let url = document.querySelector("#link9").getAttribute("data-url");
-    copyLink(url, "#link9");
-}
-
-// make sure to change target, find way to pass specific button into function
-function copyLink(url, button) { 
+function copyLink(index) { 
     console.log("Copy Link clicked");
 
-    let item = document.querySelector(button);
+
+    let item = document.querySelector(`#link${index}`);
+    let url = item.getAttribute("data-url");
 
     item.innerHTML = "Copied link!";
     navigator.clipboard.writeText(url);

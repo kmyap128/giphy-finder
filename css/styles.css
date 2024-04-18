@@ -216,7 +216,7 @@ input {
 
 #select-wrapper {
     border: 1px solid;
-    width: 80px;
+    width: 100px;
     padding-left: 5px;
     margin-left: 20px;
     background-color: white;
@@ -231,7 +231,7 @@ input {
 
 select {
     border: 0px;
-    width: 70px;
+    width: 90px;
 }
 
 #footer  {
