@@ -55,6 +55,8 @@ let offset = 0;
 function search(term) {
     console.log("search() called");
 
+    api_url = GIPHY_URL + "api_key=" + GIPHY_KEY;
+
     displayTerm = term;
 
     term = term.trim();
@@ -197,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
             toggle.style.color = "#ffffff"
         } else {
             // Set body background color to light
-            body.style.backgroundColor = '#cbf9ff'
+            body.style.backgroundColor = '#a5e3eb'
             wrapper.style.backgroundColor = '#ffffff';
             toggle.style.color = '#000000'
         }

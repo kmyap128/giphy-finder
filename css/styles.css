@@ -5,7 +5,7 @@
 }
 
  body {
-    background-color: #cbf9ff;
+    background-color: #a5e3eb;
 }
 
 .switch {
@@ -144,6 +144,10 @@ header h1{
 
 .result #url {
     visibility: hidden;
+}
+
+#content p {
+    text-align: center;
 }
 
 button{
