@@ -1,12 +1,11 @@
-// TODO: 
-// add view more button to vview more results (limit to 10-15 per page maybe)
-// fix copy link
-// add favorites bar
-
-
-
 window.onload = (e) => {
     document.querySelector("#search").onclick = searchButtonClicked;
+    document.querySelector("#searchterm").addEventListener("keyup", function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            searchButtonClicked();
+        }
+    })
     document.querySelector("#happy").onclick = happyButtonClicked;
     document.querySelector("#sad").onclick = sadButtonClicked;
     document.querySelector("#excited").onclick = excitedButtonClicked;
@@ -141,8 +140,8 @@ function dataLoaded(e) {
 
         let line = `<div class="result">`;
         line += `<a href="${url}"><img src="${imageUrl}" alt="" /></a>`;
-        line += `<span><button id="link${i}" data-url="${url}">Copy Link</button>`;
-        line += `<p data-rating="${rating}" style="background-color: ${rcolor};">Rating: ${rating}</p></span>`;
+        line += `<button id="link${i}" data-url="${url}">Copy Link</button>`;
+        line += `<span><p data-rating="${rating}" style="background-color: ${rcolor};">Rating: ${rating}</p></span>`;
         line += `</div>`;
 
         bigString += line;
@@ -158,6 +157,8 @@ function dataLoaded(e) {
     for (let i = 0; i < results.length; i++) {
         document.querySelector(`#link${i}`).onclick = () => copyLink(i);
     }
+
+
 }
 
 function copyLink(index) { 
