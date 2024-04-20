@@ -177,6 +177,51 @@ function copyLink(index) {
 }
 
 
+function saveRecentSearches(e) {
+    let savedList = "kby1440-items-list";
+
+    // Removes duplicates from recent searches
+    items = items.filter((item, index) => {
+        return items.indexOf(item) === index;
+    })
+
+    let stringifiedItems = JSON.stringify(items);
+    localStorage.setItem(savedList, stringifiedItems)
+}
+
+
+function getRecentSearches(e) {
+    let savedList = "kby1440-items-list";
+    items = localStorage.getItem(savedList);
+    items = JSON.parse(items);
+
+    if (items != null) {
+        let bigString = "";
+        for (let i = 0; i < items.length; i++) {
+            bigString += `<option value="${items[i]}">`;
+        }
+        document.querySelector("#recentSearches").innerHTML = bigString;
+    }
+    else {
+        items = [];
+    }
+}
+
+
+function saveLastSearched(e) {
+    savedTerm = "kby1440-search-term";
+    localStorage.setItem(savedTerm, e)
+}
+
+
+function getLastSearched(e) {
+    let savedTerm = "kby1440-search-term";
+    searchTerm = localStorage.getItem(savedTerm);
+    displayTerm = searchTerm;
+    document.querySelector("#searchterm").value = displayTerm;
+}
+
+
 function dataError(e) {
     console.log("An error occured")
 }
